@@ -1,0 +1,39 @@
+@Orbit.Api_HostAddress = http://localhost:5146
+
+GET {{Orbit.Api_HostAddress}}/api/dashboard
+Accept: application/json
+
+###
+
+GET {{Orbit.Api_HostAddress}}/api/health/database
+Accept: application/json
+
+###
+
+GET {{Orbit.Api_HostAddress}}/api/missoes
+Accept: application/json
+
+###
+
+POST {{Orbit.Api_HostAddress}}/api/checkups/avaliar
+Content-Type: application/json
+
+{
+  "missaoId": 1
+}
+
+###
+
+POST {{Orbit.Api_HostAddress}}/api/astronautas
+Content-Type: application/json
+
+{
+  "nome": "Marina Costa",
+  "funcao": "Medica de voo",
+  "fadiga": 32,
+  "hidratacao": 86,
+  "oxigenacao": 98,
+  "temperaturaCorporal": 36.6
+}
+
+###
