@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Orbit API
 
 Backend em ASP.NET Core para a Global Solution 2026/1.
@@ -254,3 +255,6 @@ Resultado:
 - `Apta`: sem alertas importantes;
 - `EmAtencao`: alertas moderados ou risco intermediario;
 - `Bloqueada`: alerta critico ou risco alto.
+=======
+# Orbit-API
+>>>>>>> 296e32b8925ab2c439186430c20213cdcadd9fe9
