@@ -207,7 +207,71 @@ Content-Type: application/json
   "missaoId": 1
 }
 ```
+## Criando uma missão com nave, base e astronautas
 
+Antes de criar uma missão, é necessário ter cadastrado pelo menos:
+
+- 1 nave;
+- 1 base espacial, caso a missão tenha base de suporte;
+- 1 ou mais astronautas.
+
+Isso acontece porque a missão usa os IDs desses registros para criar os relacionamentos no banco.
+
+### 1. Consultar os registros existentes
+
+Para ver quais IDs podem ser usados na missão:
+
+```http
+GET http://localhost:5146/api/naves
+GET http://localhost:5146/api/bases-espaciais
+GET http://localhost:5146/api/astronautas
+```
+
+### 2. Criar uma missao
+
+```http
+POST http://localhost:5146/api/missoes
+```
+Body
+```http
+{
+  "nome": "Reconhecimento Lunar",
+  "objetivo": "Avaliar as condicoes da area para instalacao de novos equipamentos.",
+  "destino": "Lua",
+  "naveId": 1,
+  "baseSuporteId": 1,
+  "astronautaIds": [1, 2]
+}
+```
+<br>
+Nesse exemplo:
+
+naveId: 1 liga a missão à nave de ID 1. <br>
+baseSuporteId: 1 liga a missão à base espacial de ID 1. <br>
+astronautaIds: [1, 2] liga a missão aos astronautas de ID 1 e 2. <br>
+
+A relação entre missão e astronauta é N:N, ou seja:
+
+uma missão pode ter vários astronautas;
+um astronauta pode participar de várias missões.
+Essa ligação é salva automaticamente na tabela intermediária `MISSAO_ASTRONAUTA`.
+
+### 3. Criar missão sem base de suporte
+
+Caso a missão ainda não tenha uma base de suporte definida, envie baseSuporteId como null:
+Body:
+```http
+{
+  "nome": "Patrulha Orbital",
+  "objetivo": "Monitorar comunicacao e trajetoria orbital.",
+  "destino": "Orbita terrestre",
+  "naveId": 1,
+  "baseSuporteId": null,
+  "astronautaIds": [1, 2]
+}
+```
+<br>
+<br>
 Quando voce usa o Postman, ele chama a API. A API usa o Entity Framework, e o Entity Framework altera o `orbit.db`. Portanto, um `POST` no Postman tambem faz um `INSERT` no banco; um `PUT` faz `UPDATE`; um `DELETE` remove o registro.
 
 Fluxo recomendado para demonstracao:
